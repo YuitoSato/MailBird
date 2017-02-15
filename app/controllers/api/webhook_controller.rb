@@ -4,12 +4,13 @@ class Api::WebhookController < ApplicationController
   def callback
     body = request.body.read
 
+    client = Line::Bot::Client.new
+
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
       render :nothing => true, status: 470
     end
 
-    client = Line::Bot::Client.new
     events = client.parse_events_from(body)
 
     events.each { |event|
