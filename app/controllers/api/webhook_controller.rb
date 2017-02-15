@@ -3,10 +3,10 @@ class Api::WebhookController < ApplicationController
 
   def callback
     body = request.raw_post
-    client = Line::Bot::Client.new
-    # client.channel_secret = ENV['LINE_CHANNEL_SECRET']
-    # client.channel_token  = ENV['LINE_CHANNEL_TOKEN']
-
+    client ||= Line::Bot::Client.new { |config|
+      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
+      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+    }
     signature = request.env['HTTP_X_LINE_SIGNATURE']
 
     unless client.validate_signature(body, signature)
