@@ -8,7 +8,7 @@ class Api::WebhookController < ApplicationController
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
-      render :nothing => true, status: 470
+      render :nothing => true, status: 470 and return
     end
 
     events = client.parse_events_from(body)
