@@ -1,5 +1,5 @@
 class Api::WebhookController < ApplicationController
-  protect_from_forgery with: :null_session
+  protect_from_forgery except: [:callback]
 
   def callback
     body = request.body.read
@@ -9,7 +9,7 @@ class Api::WebhookController < ApplicationController
       render :nothing => true, status: 470
     end
 
-    client = Line::Bot::Client
+    client = Line::Bot::Client.new
     events = client.parse_events_from(body)
 
     events.each { |event|
