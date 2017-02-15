@@ -2,11 +2,12 @@ class Api::WebhookController < ApplicationController
   protect_from_forgery except: [:callback]
 
   def callback
+    body = request.raw_post
     client = Line::Bot::Client.new
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
-      render :nothing => true, status: 470 and return
+      render body: nil, status: 470 and return
     end
 
     events = client.parse_events_from(body)
@@ -29,6 +30,6 @@ class Api::WebhookController < ApplicationController
       end
     }
 
-    render :nothing => true, status: :ok
+    render body: nil, status: :ok
   end
 end
