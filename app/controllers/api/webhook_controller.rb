@@ -6,9 +6,9 @@ class Api::WebhookController < ApplicationController
     client = Line::Bot::Client.new
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
-    unless client.validate_signature(body, signature)
-      render body: nil, status: 470 and return
-    end
+    # unless client.validate_signature(body, signature)
+    #   render body: nil, status: 470 and return
+    # end
 
     events = client.parse_events_from(body)
 
