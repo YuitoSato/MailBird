@@ -4,8 +4,8 @@ class Api::WebhookController < ApplicationController
   def callback
     body = request.raw_post
     client ||= Line::Bot::Client.new { |config|
-      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
+      config.channel_secret = ENV['LINE_CHANNEL_SECRET']
+      config.channel_token = ENV['LINE_CHANNEL_TOKEN']
     }
     signature = request.env['HTTP_X_LINE_SIGNATURE']
 
@@ -22,7 +22,7 @@ class Api::WebhookController < ApplicationController
         when Line::Bot::Event::MessageType::Text
           message = {
             type: 'text',
-            text: event.message['text']
+            text: event.message['text'] + 'っすね'
           }
           client.reply_message(event['replyToken'], message)
         when Line::Bot::Event::MessageType::Image, Line::Bot::Event::MessageType::Video
