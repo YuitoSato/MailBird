@@ -2,8 +2,6 @@ class Api::WebhookController < ApplicationController
   protect_from_forgery except: [:callback]
 
   def callback
-    body = request.body.read
-
     client = Line::Bot::Client.new
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
