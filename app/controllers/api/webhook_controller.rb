@@ -6,7 +6,7 @@ class Api::WebhookController < ApplicationController
 
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless client.validate_signature(body, signature)
-      error 400 do 'Bad Request' end
+      render :nothing => true, status: 470
     end
 
     client = Line::Bot::Client
@@ -30,6 +30,6 @@ class Api::WebhookController < ApplicationController
       end
     }
 
-    "OK"
+    render :nothing => true, status: :ok
   end
 end
