@@ -1,10 +1,10 @@
 class CreateArticles < ActiveRecord::Migration[5.0]
   def change
     create_table :articles do |t|
-      t.string   :title
-      t.string   :url
-      t.text     :content
-      t.time     :published_at
+      t.string   :title, null: false
+      t.string   :url, null: false
+      t.text     :content, null: false
+      t.datetime :published_at
 
       t.timestamps
     end

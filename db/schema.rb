@@ -10,15 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170221055218) do
+ActiveRecord::Schema.define(version: 20170221112109) do
 
   create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "title"
-    t.string   "url"
-    t.text     "content",      limit: 65535
-    t.time     "published_at"
+    t.string   "title",                      null: false
+    t.string   "url",                        null: false
+    t.text     "content",      limit: 65535, null: false
+    t.datetime "published_at"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "keyphrases", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name",                   null: false
+    t.integer  "content_id",             null: false
+    t.integer  "score",      default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
