@@ -1,1 +1,2 @@
-sites: ["http://jp.techcrunch.com/feed/"]
+sites:
+  - "http://jp.techcrunch.com/feed/"
