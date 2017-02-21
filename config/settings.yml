@@ -1,2 +1,5 @@
 sites:
   - "http://jp.techcrunch.com/feed/"
+
+keyphrase:
+  max_score: 100
