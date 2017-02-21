@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module MailBird
   class Application < Rails::Application
+    config.autoload_paths += Dir["#{config.root}/app/services"
     config.generators do |g|
       g.assets  false
       g.helper  false
