@@ -6,8 +6,7 @@ class Crawler
         Article.where(url: entry.url).first_or_create(
           title:        entry.title,
           url:          entry.url,
-          summary:      entry.summary,
-          content:      entry.content
+          content:      entry.content,
           published_at: entry.published
         )
       end
