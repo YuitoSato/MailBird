@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170221055218) do
     t.string   "title"
     t.string   "url"
     t.text     "content",      limit: 65535
-    t.time     "published_at"
+    t.datetime "published_at"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
   end
